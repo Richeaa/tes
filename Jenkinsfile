@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        nodejs 'NodeJS-21'  // Sesuaikan dengan nama NodeJS di Jenkins
+        nodejs 'NodeJS-21'
     }
     
     environment {
@@ -17,17 +17,26 @@ pipeline {
             }
         }
         
+        stage('Check Node Version') {
+            steps {
+                echo '🔍 Checking versions...'
+                sh 'node --version'
+                sh 'npm --version'
+            }
+        }
+        
         stage('Install Dependencies') {
             steps {
                 echo '📦 Installing dependencies...'
-                sh 'npm install'  // 'bat' untuk Windows, 'sh' untuk Linux
+                sh 'npm install'
+                sh 'chmod -R +x node_modules/.bin'  // Fix permission untuk semua executables
             }
         }
         
         stage('Run Tests') {
             steps {
                 echo '🧪 Running tests...'
-                sh 'npx jest'
+                sh 'npm test'  // Sekarang pakai npm test biasa
             }
         }
         
@@ -42,8 +51,8 @@ pipeline {
             steps {
                 echo '🚀 Deploying application...'
                 sh '''
-                    echo Deployment successful!
-                    echo Application: ${APP_NAME}
+                    echo "Deployment successful!"
+                    echo "Application: ${APP_NAME}"
                 '''
             }
         }
