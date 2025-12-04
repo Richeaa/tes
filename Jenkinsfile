@@ -20,30 +20,30 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo '📦 Installing dependencies...'
-                bat 'npm install'  // 'bat' untuk Windows, 'sh' untuk Linux
+                sh 'npm install'  // 'bat' untuk Windows, 'sh' untuk Linux
             }
         }
         
         stage('Run Tests') {
             steps {
                 echo '🧪 Running tests...'
-                bat 'npm test'
+                sh 'npm test'
             }
         }
         
         stage('Build') {
             steps {
                 echo '🔨 Building application...'
-                bat 'npm run build'
+                sh 'npm run build'
             }
         }
         
         stage('Deploy') {
             steps {
                 echo '🚀 Deploying application...'
-                bat '''
+                sh '''
                     echo Deployment successful!
-                    echo Application: %APP_NAME%
+                    echo Application: ${APP_NAME}
                 '''
             }
         }
