@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        nodejs 'NodeJS-25'  // Sesuaikan dengan nama NodeJS di Jenkins
+        nodejs 'NodeJS-21'  // Sesuaikan dengan nama NodeJS di Jenkins
     }
     
     environment {
